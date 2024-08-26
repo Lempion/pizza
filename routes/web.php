@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    dd('Hello');
+    return view('home');
 })->name('home');
 
 require __DIR__ . '/auth.php';
