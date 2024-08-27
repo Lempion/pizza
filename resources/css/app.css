@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.show-nav {
+    @apply z-30 opacity-100 !important;
+}
+
+.product-card-description {
+    @apply overflow-hidden font-medium;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.link-active {
+    @apply text-orange-400 !important;
+}

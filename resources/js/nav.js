@@ -5,8 +5,35 @@ $(document).scroll(function () {
     const targetBlockRect = $(targetBlock)[0].getBoundingClientRect();
 
     if (targetBlockRect.top <= 100) {
-        hiddenBlock.removeClass('opacity-0').addClass('opacity-100');
+        hiddenBlock.addClass('show-nav');
     } else {
-        hiddenBlock.removeClass('opacity-100').addClass('opacity-0');
+        hiddenBlock.removeClass('show-nav');
     }
 })
+
+$('.scroll').on('click', function(e){
+    $('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - 100}, 1000);
+    e.preventDefault();
+});
+
+$(document).ready(function() {
+    const sections = $('.products-section');
+    const navLinks = $('.scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.id;
+            const navLink = $(`nav a[href="#${id}"]`);
+
+            if (entry.isIntersecting) {
+                navLink.addClass('link-active');
+            } else {
+                navLink.removeClass('link-active');
+            }
+        });
+    }, { threshold: 0.5 }); // Настройте порог по необходимости
+
+    sections.each(function() {
+        observer.observe(this);
+    });
+});

@@ -1,17 +1,12 @@
-@props(['active' => false])
+@props(['anchor', 'src', 'name'])
 
-@php
-$activeClasses = ($active)
-            ? 'text-gray-400'
-            : 'text-gray-600 hover:text-gray-900';
-$classes = 'relative font-extrabold text-lg ' . $activeClasses;
-@endphp
-
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-    @if($active)
-        <div class="absolute block bg-orange-500 p-1 rounded-full -top-2 left-1/2 transform -translate-x-1/2"></div>
-    @endif
-</a>
+<div>
+    <a class="flex flex-col justify-center items-center transition duration-700 ease-in-out hover:underline scroll" href="#{{ $anchor }}">
+        <div class="w-[35px] h-[35px]">
+            <img src="{{ $src }}" class="w-full h-full" alt="...">
+        </div>
+        <p>{{ $name }}</p>
+    </a>
+</div>
 
 

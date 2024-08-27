@@ -20,16 +20,18 @@
 </head>
 <body class="font-sans w-11/12 mx-auto">
 
-@include('layouts.navigation')
+    @include('layouts.navigation')
 
-@include('layouts.carousel')
+    @include('layouts.carousel')
 
-@include('layouts.main-navigation')
+    @include('layouts.main-navigation')
 
-<main>
-    {{ $slot }}
-</main>
+    <main>
+        {{ $slot }}
+    </main>
 
-@vite('resources/js/nav.js')
+    @include('layouts.footer')
+
+    @vite('resources/js/nav.js')
 </body>
 </html>
