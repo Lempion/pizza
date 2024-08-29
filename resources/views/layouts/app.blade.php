@@ -18,7 +18,7 @@
         crossorigin="anonymous"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans w-11/12 mx-auto">
+<body class="font-sans w-11/12 mx-auto custom-scroll">
 
     @include('layouts.navigation')
 

@@ -16,3 +16,30 @@
 .link-active {
     @apply text-orange-400 !important;
 }
+
+.active-additional-product {
+    @apply border-orange-500 !important;
+}
+
+.pr-scroll {
+    @apply pr-2 !important;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    @apply w-2;
+}
+
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-md;
+}
+
+/* Handle */
+.custom-scroll::-webkit-scrollbar-thumb {
+    @apply bg-orange-500/70 rounded-md;
+}
+
+/* Handle on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange-500/70;
+}

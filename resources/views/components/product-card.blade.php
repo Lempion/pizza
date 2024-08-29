@@ -9,11 +9,9 @@
             <div class="font-extrabold text-lg py-1">{{ $name }}</div>
             <div class="product-card-description">{{ $description }}</div>
         </div>
-        <div class="flex justify-between items-center w-10/12 font-semibold text-xl">
-            <div>${{ $price }}</div>
-            <div class="text-white bg-orange-500 shadow-md hover:shadow-orange-400  rounded-xl p-2">
-                In Cart
-            </div>
+        <div class="flex justify-between items-center w-10/12">
+            <div class="font-semibold text-xl">${{ $price }}</div>
+            <x-in-cart-button/>
         </div>
     </div>
 </div>
