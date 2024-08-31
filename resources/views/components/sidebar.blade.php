@@ -8,7 +8,7 @@
         </a>
         <ul class="space-y-2">
             <x-admin-sidebar-li href="{{ route('admin.dashboard.index') }}" :active="request()->routeIs('admin.dashboard.*')" name="Dashboard" svgFile="svg.dashboard" quantity="3"/>
-            <x-admin-sidebar-li href="#" :active="request()->routeIs('admin.products.*')" name="Products" svgFile="svg.products" quantity="3"/>
+            <x-admin-sidebar-li href="{{ route('products.index') }}" :active="request()->routeIs('products.*')" name="Products" svgFile="svg.products" quantity="3"/>
         </ul>
     </div>
 </aside>

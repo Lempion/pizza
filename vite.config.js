@@ -10,7 +10,7 @@ export default defineConfig({
                 'resources/js/nav.js',
                 'resources/js/product.js',
             ],
-            refresh: true,
+            refresh: false,
         }),
     ],
 });
