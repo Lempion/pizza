@@ -48,3 +48,7 @@ input[type=radio]{
 .custom-scroll::-webkit-scrollbar-thumb:hover {
     @apply bg-orange-500/70;
 }
+
+.active-link-admin {
+    @apply bg-orange-500/90 font-semibold text-white !important;
+}

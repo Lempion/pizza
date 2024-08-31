@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,8 +9,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->middleware('role:Admin')->group(function () {
 
-    Route::get('main', [MainController::class, 'index'])->name('admin.main.index');
-
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
 
     Route::middleware('role:admin')->group(function () {

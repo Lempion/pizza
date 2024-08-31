@@ -26,7 +26,7 @@
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                             @if(auth()->user()->role(['Admin']))
                                 <li>
-                                    <a href="{{ route('admin.main.index') }}" class="block text-white font-semibold px-4 py-2 bg-orange-400 hover:bg-orange-500">Admin</a>
+                                    <a href="{{ route('admin.dashboard.index') }}" class="block text-white font-semibold px-4 py-2 bg-orange-400 hover:bg-orange-500">Admin</a>
                                 </li>
                             @endif
                             <li>
