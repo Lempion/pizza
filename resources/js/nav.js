@@ -1,22 +1,15 @@
 $(document).scroll(function () {
-    const targetBlock = $('#trigger');
-    const hiddenBlock = $('#main-nav');
-
-    const targetBlockRect = $(targetBlock)[0].getBoundingClientRect();
-
-    if (targetBlockRect.top <= 100) {
-        hiddenBlock.addClass('show-nav');
-    } else {
-        hiddenBlock.removeClass('show-nav');
-    }
+    scrollDoc();
 })
 
-$('.scroll').on('click', function(e){
-    $('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - 100}, 1000);
+$('.scroll').on('click', function (e) {
+    $('html,body').stop().animate({scrollTop: $(this.hash).offset().top - 100}, 1000);
     e.preventDefault();
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
+    scrollDoc();
+
     const sections = $('.products-section');
     const navLinks = $('.scroll');
 
@@ -31,9 +24,23 @@ $(document).ready(function() {
                 navLink.removeClass('link-active');
             }
         });
-    }, { threshold: 0.5 }); // Настройте порог по необходимости
+    }, {threshold: 0.5}); // Настройте порог по необходимости
 
-    sections.each(function() {
+    sections.each(function () {
         observer.observe(this);
     });
 });
+
+
+function scrollDoc() {
+    const targetBlock = $('#trigger');
+    const hiddenBlock = $('#main-nav');
+
+    const targetBlockRect = $(targetBlock)[0].getBoundingClientRect();
+
+    if (targetBlockRect.top <= 100) {
+        hiddenBlock.addClass('show-nav');
+    } else {
+        hiddenBlock.removeClass('show-nav');
+    }
+}
