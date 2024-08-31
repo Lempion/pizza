@@ -4,7 +4,7 @@ namespace App\Trait\Enum;
 
 use Illuminate\Support\Arr;
 
-trait GetValues
+trait EnumsGetValues
 {
     public static function getValues(): array
     {

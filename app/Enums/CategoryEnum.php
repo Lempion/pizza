@@ -2,12 +2,12 @@
 
 namespace App\Enums;
 
-use App\Trait\Enum\GetValues;
+use App\Trait\Enum\EnumsGetValues;
 
 enum CategoryEnum: string
 {
 
-    use GetValues;
+    use EnumsGetValues;
 
     case Breakfast = 'breakfast';
 

@@ -11,7 +11,7 @@ Route::prefix('admin')->group(function () {
     Route::get('login', [LoginController::class, 'login'])->name('admin.login');
     Route::post('login', [LoginController::class, 'authorize'])->name('admin.authorize');
 
-    Route::middleware('admin')->group(function () {
+    Route::middleware('role:admin')->group(function () {
 
     });
 });
