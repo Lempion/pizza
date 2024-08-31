@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\MainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::prefix('admin')->group(function () {
-    Route::get('login', [LoginController::class, 'login'])->name('admin.login');
-    Route::post('login', [LoginController::class, 'authorize'])->name('admin.authorize');
+Route::prefix('admin')->middleware('role:Admin')->group(function () {
+
+    Route::get('main', [MainController::class, 'index'])->name('admin.main.index');
+
+
 
     Route::middleware('role:admin')->group(function () {
 
