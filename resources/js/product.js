@@ -12,7 +12,7 @@ $('.product-card-wrapper').on('click', function (event) {
     disableScroll();
 
     if (slug === oldSlug) {
-        $(productModal).removeClass('hidden');
+        $(productModal).removeClass('hidde-block');
         return;
     }
 
@@ -32,13 +32,13 @@ $('.product-card-wrapper').on('click', function (event) {
     // })
 
     // $(productModal).append();
-    $(productModal).removeClass('hidden');
+    $(productModal).removeClass('hidde-block');
 })
 
 $('.product-modal').on('click', function (event) {
     if ($(event.target).hasClass('product-modal')) {
         enableScroll()
-        $(this).addClass('hidden');
+        $(this).addClass('hidde-block');
     }
 })
 

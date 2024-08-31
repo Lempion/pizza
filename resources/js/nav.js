@@ -39,8 +39,8 @@ function scrollDoc() {
     const targetBlockRect = $(targetBlock)[0].getBoundingClientRect();
 
     if (targetBlockRect.top <= 100) {
-        hiddenBlock.addClass('show-nav');
+        hiddenBlock.removeClass('hidde-block');
     } else {
-        hiddenBlock.removeClass('show-nav');
+        hiddenBlock.addClass('hidde-block');
     }
 }
