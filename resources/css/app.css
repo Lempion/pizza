@@ -52,3 +52,11 @@ input[type=radio]{
 .active-link-admin {
     @apply bg-orange-500/90 font-semibold text-white !important;
 }
+
+.input-invalid {
+    @apply border-red-500 bg-red-300 !important;
+}
+
+.tr-active {
+    @apply bg-gray-100 !important;
+}
