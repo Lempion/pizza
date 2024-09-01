@@ -26,7 +26,7 @@
                 <td class="py-2 px-2">
                     <div>
                         <x-forms.select name="size" label="" class="selector-size text-center">
-                            <option selected disabled hidden>Sizes</option>
+                            <option selected disabled hidden value="not-choose">Sizes</option>
                             @foreach($sizeProducts as $size)
                                 <option value="{{ $size->id }}">{{ $size->name }}</option>
                             @endforeach

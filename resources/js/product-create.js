@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //START Создание размеров продукта если выбрана любая категория, кроме Комбо
     const trActiveClone = $('.tr-active').clone();
     let elemP = '<div class="elem-p text-xl font-normal w-full"></div>'
 
@@ -142,11 +143,19 @@ $(document).ready(function () {
             return
         }
         $(currentTr).remove();
-    }).on('click', 'input,select,textarea', function () {
-        $(this).removeClass('input-invalid');
+    }).on('change', '.selector-size', function () {
+        let numberElementsWithThisValue = $('option[value="' + $(this).val() + '"]:selected').length;
+
+        if (numberElementsWithThisValue > 1){
+            alert('This size exists');
+            $(this).val('not-choose');
+        }
     }).on('click', '.default-product', function () {
         $('.default-product').prop('checked', false);
         $(this).prop('checked', true);
+        //END Создание размеров продукта если выбрана любая категория, кроме Комбо
+    }).on('click', 'input,select,textarea', function () {
+        $(this).removeClass('input-invalid');
     });
 
     function removeAllInputInvalid() {
