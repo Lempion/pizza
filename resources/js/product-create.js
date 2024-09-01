@@ -1,6 +1,8 @@
 $(document).ready(function () {
+    let routeGetTable = $('.routeGetTable').val();
+
     //START Создание размеров продукта если выбрана любая категория, кроме Комбо
-    const trActiveClone = $('.tr-active').clone();
+    let trActiveClone;
     let elemP = '<div class="elem-p text-xl font-normal w-full"></div>'
 
     $(document).on('click', '.add-size-product', function () {
@@ -120,9 +122,17 @@ $(document).ready(function () {
         let price = $(currentTr).find('#price');
         let gram = $(currentTr).find('#gram');
 
-        price.val(price.attr('data-old-value'));
-        gram.val(gram.attr('data-old-value'));
-        sizeChecked.val(sizeChecked.attr('data-old-value'));
+        price.val(price.attr('data-old-value')).addClass('hidden');
+        gram.val(gram.attr('data-old-value')).addClass('hidden');
+        sizeChecked.val(sizeChecked.attr('data-old-value')).addClass('hidden');
+
+        $(currentTr).find('.elem-p').removeClass('hidden');
+        $(currentTr).find('#default-product').removeClass('hidden');
+
+        $(currentTr).find('.active-create').addClass('hidden');
+        $(currentTr).find('.active-change').removeClass('hidden');
+
+        $(currentTr).removeClass('tr-active').addClass('tr-created');
     }).on('click', '.remove-size', function () {
         let activeElem = $('.tr-active').length;
 
@@ -146,7 +156,7 @@ $(document).ready(function () {
     }).on('change', '.selector-size', function () {
         let numberElementsWithThisValue = $('option[value="' + $(this).val() + '"]:selected').length;
 
-        if (numberElementsWithThisValue > 1){
+        if (numberElementsWithThisValue > 1) {
             alert('This size exists');
             $(this).val('not-choose');
         }
@@ -156,6 +166,26 @@ $(document).ready(function () {
         //END Создание размеров продукта если выбрана любая категория, кроме Комбо
     }).on('click', 'input,select,textarea', function () {
         $(this).removeClass('input-invalid');
+    }).on('change', '.selector-category', function () {
+        let tableWrapper = $('.table-wrapper');
+        tableWrapper.empty();
+
+        let category = $(this).val();
+        let currentUrl = routeGetTable + category
+
+        console.log(currentUrl)
+
+        $.ajax({
+            url: currentUrl,
+            method: 'GET',
+            success(answer) {
+                tableWrapper.append(answer);
+                trActiveClone = $('.tr-active').clone();
+            },
+            error(errors) {
+                console.log(errors)
+            }
+        })
     });
 
     function removeAllInputInvalid() {

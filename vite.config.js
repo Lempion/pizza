@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/product.js',
                 'resources/js/product-create.js',
                 'resources/js/public_function_and_action.js',
+                'resources/js/product-create-combo.js',
             ],
             refresh: false,
         }),

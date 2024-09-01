@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\SizeProduct;
+use App\Models\Product;
 use App\Services\Models\ModelProduct;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,9 +25,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $sizeProducts = SizeProduct::all();
+        $products = Product::all();
 
-        return view('admin.products.create', compact('categories', 'sizeProducts'));
+        return view('admin.products.create', compact('categories', 'products'));
     }
 
     /**
@@ -67,5 +68,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getCurrentTale(Category $category): string
+    {
+        return ProductService::renderCurrentTable($category->slug);
     }
 }

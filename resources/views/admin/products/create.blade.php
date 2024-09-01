@@ -1,5 +1,5 @@
 <x-admin-layout>
-    @vite('resources/js/product-create.js')
+    @vite(['resources/js/product-create.js', 'resources/js/product-create-combo.js'])
     <x-header title="Product create"/>
 
     <section class="mt-12 flex space-x-3">
@@ -30,7 +30,11 @@
             </div>
         </div>
 
-        <x-product-create-size :size-products="$sizeProducts"/>
+        <input type="hidden" class="routeGetTable" value="{{ route('get-current-table-for-create-product', '') . '/' }}">
+        <div class="table-wrapper w-full h-full relative">
+{{--            <x-product-create-size :size-products="$sizeProducts"/>--}}
+            <x-product-combo :products="[]"/>
+        </div>
     </section>
 
 </x-admin-layout>
