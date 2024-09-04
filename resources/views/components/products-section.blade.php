@@ -7,12 +7,12 @@
         {{--        <x-product-card slug="{{ $product-> }}" price="{{ $product-> }}" name="{{ $product-> }}" description="{{ $product-> }}" src="{{ $product-> }}"/>--}}
         {{--    @endforeach--}}
 
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/production/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/production/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/production/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/production/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/production/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/production/coffe.avif') }}"/>
+        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
+        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
+        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
+        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
+        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
+        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
     </div>
 </div>
 

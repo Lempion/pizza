@@ -4,7 +4,7 @@
     <x-input-search-product/>
 
     <table class="w-full text-sm text-center text-gray-500 overflow-x-auto">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <thead class="text-xs text-gray-700 uppercase bg-orange-50">
             <tr>
                 <th scope="col" class="py-3 px-6">
                     Name

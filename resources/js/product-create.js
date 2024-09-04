@@ -1,5 +1,7 @@
 $(document).ready(function () {
     let routeGetTable = $('.routeGetTable').val();
+    let routeProductStore = $('.routeProductStore').val();
+    let srcImage = $('.srcImage').val();
 
     //START Создание размеров продукта если выбрана любая категория, кроме Комбо
     let trActiveClone;
@@ -9,7 +11,7 @@ $(document).ready(function () {
         let activeElem = $('.tr-active').length;
 
         if (activeElem) {
-            alert('Elem add active');
+            toastError('Elem add active')
             return;
         }
 
@@ -54,11 +56,11 @@ $(document).ready(function () {
         }
 
         if (error) {
-            alert('Change errors');
+            toastError('Fields invalid');
             return;
         }
 
-        let defaultProduct = $(currentTr).find('#default-product');
+        let defaultProduct = $(currentTr).find('#default_product');
 
         if ($('.size-product-tbody tr').length == 1) {
             defaultProduct.prop('checked', true);
@@ -85,7 +87,7 @@ $(document).ready(function () {
         let activeElem = $('.tr-active').length;
 
         if (activeElem) {
-            alert('End current active');
+            toastError('Complete the active action');
             return
         }
 
@@ -103,7 +105,7 @@ $(document).ready(function () {
         gram.removeClass('hidden');
 
         $(currentTr).find('.elem-p').addClass('hidden');
-        $(currentTr).find('#default-product').addClass('hidden');
+        $(currentTr).find('#default_product').addClass('hidden');
 
         $(currentTr).addClass('tr-active')
     }).on('click', '.cancel-size', function () {
@@ -111,7 +113,7 @@ $(document).ready(function () {
         let currentTr = $('tr[data-current-tr="' + $(this).data('tr') + '"]')[0];
 
         if ($('.size-product-tbody tr').length == 1 && !$(currentTr).hasClass('tr-created')) {
-            alert('Lonely elem');
+            toastError('Cannot delete a single element');
             return;
         } else if (!$(currentTr).hasClass('tr-created')) {
             $(currentTr).remove();
@@ -127,7 +129,7 @@ $(document).ready(function () {
         sizeChecked.val(sizeChecked.attr('data-old-value')).addClass('hidden');
 
         $(currentTr).find('.elem-p').removeClass('hidden');
-        $(currentTr).find('#default-product').removeClass('hidden');
+        $(currentTr).find('#default_product').removeClass('hidden');
 
         $(currentTr).find('.active-create').addClass('hidden');
         $(currentTr).find('.active-change').removeClass('hidden');
@@ -137,19 +139,19 @@ $(document).ready(function () {
         let activeElem = $('.tr-active').length;
 
         if ($('.size-product-tbody tr').length == 1) {
-            alert('Lonely elem');
+            toastError('Cannot delete a single element');
             return
         }
 
         if (activeElem) {
-            alert('End current active');
+            toastError('Complete the active action');
             return
         }
 
         let currentTr = $('tr[data-current-tr="' + $(this).data('tr') + '"]')[0];
 
-        if ($(currentTr).find('.default-product').prop('checked')) {
-            alert('Can`t remove Default elem');
+        if ($(currentTr).find('.default_product').prop('checked')) {
+            toastError('Cannot delete default element');
             return
         }
         $(currentTr).remove();
@@ -157,11 +159,11 @@ $(document).ready(function () {
         let numberElementsWithThisValue = $('option[value="' + $(this).val() + '"]:selected').length;
 
         if (numberElementsWithThisValue > 1) {
-            alert('This size exists');
+            toastError('This size exists');
             $(this).val('not-choose');
         }
-    }).on('click', '.default-product', function () {
-        $('.default-product').prop('checked', false);
+    }).on('click', '.default_product', function () {
+        $('.default_product').prop('checked', false);
         $(this).prop('checked', true);
         //END Создание размеров продукта если выбрана любая категория, кроме Комбо
     }).on('click', 'input,select,textarea', function () {
@@ -172,8 +174,6 @@ $(document).ready(function () {
 
         let category = $(this).val();
         let currentUrl = routeGetTable + category
-
-        console.log(currentUrl)
 
         $.ajax({
             url: currentUrl,
@@ -187,6 +187,127 @@ $(document).ready(function () {
             }
         })
     });
+
+    $('#product-img').on('change', function () {
+
+        let routeUploadProductImg = $('.routeUploadProductImg').val();
+
+        let file = this.files[0];
+        if (!file) {
+            toastError('Error loading image')
+            return;
+        }
+
+        let token = $('[name="_token"]').val();
+
+        let formData = new FormData();
+        formData.append('productImg', file);
+        formData.append('_token', token);
+
+        $.ajax({
+            url: routeUploadProductImg,
+            method: 'POST',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success(answer) {
+                $('.product-img').attr('src', srcImage + answer);
+                $('#current_img_path').val(answer);
+            },
+            error(errors) {
+                console.log(errors)
+            }
+        })
+    });
+
+    $('.store-product').on('click', function () {
+        let name = $('#name').val();
+        if (name.length === 0) {
+            $('#name').addClass('input-invalid');
+            toastError('Field name invalid');
+            return;
+        }
+
+        let category = $('#category').val();
+        if (category === null) {
+            $('#category').addClass('input-invalid');
+            toastError('Field category invalid');
+            return;
+        }
+
+        let description = $('#description').val();
+        if (description.length === 0) {
+            $('#description').addClass('input-invalid');
+            toastError('Field description invalid');
+            return;
+        }
+
+        let inStock = $('#in_stock').val();
+        if (inStock.length === 0) {
+            $('#in_stock').addClass('input-invalid');
+            toastError('Field inStock invalid');
+            return;
+        }
+
+        let picture = $('#current_img_path').val();
+        if (picture.length === 0) {
+            $('#current_img_path').addClass('input-invalid');
+            toastError('Field picture invalid');
+            return;
+        }
+
+        let productSizesCreated = $('.size-product-tbody').find('tr.tr-created');
+
+        if (productSizesCreated.length === 0) {
+            toastError('Add at least 1 size');
+            return;
+        }
+
+        let productSizesInputs = [];
+
+        productSizesCreated.filter(function () {
+            if ($(this).attr('class').split(' ').length === 1) {
+                let arraySizes = {};
+
+                $(this).find('.tr-input').map(function (key, value) {
+                    let val = $(value).val();
+
+                    if ($(value).attr('type') === 'checkbox') {
+                        val = ($(value).is(':checked') ? 1 : 0);
+                    }
+
+                    arraySizes[$(value).attr('name')] = val
+                })
+                productSizesInputs.push(arraySizes);
+            }
+        });
+
+        let token = $('[name="_token"]').val();
+
+        $.ajax({
+            url: routeProductStore,
+            method: 'POST',
+            data: {
+                'name': name,
+                'category': category,
+                'description': description,
+                'inStock': inStock,
+                'picture': picture,
+                'productSizes': productSizesInputs,
+                '_token': token
+            },
+            success(answer) {
+                toastSuccess(answer);
+                $('.product-input').val('');
+                $('.product-img').attr('src', '');
+                $('.selector-category').val(0);
+                $('.table-wrapper').empty();
+            },
+            error(errors) {
+                console.log(errors)
+            }
+        })
+    })
 
     function removeAllInputInvalid() {
         $('.input-invalid').removeClass('input-invalid');
