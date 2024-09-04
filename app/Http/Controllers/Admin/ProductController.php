@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductStoreRequest;
+use App\Http\Requests\Admin\UploadProductImgRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\ImageService;
 use App\Services\Models\ModelProduct;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -19,9 +22,6 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
@@ -30,41 +30,29 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories', 'products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        //
+        if (ProductService::createProduct($request->validated())) {
+            return response()->json('Product created!');
+        }
+        return response()->json('Server error', 500);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
@@ -73,5 +61,10 @@ class ProductController extends Controller
     public function getCurrentTale(Category $category): string
     {
         return ProductService::renderCurrentTable($category->slug);
+    }
+
+    public function uploadProductImg(UploadProductImgRequest $request): string
+    {
+        return ImageService::uploadPhoto($request->productImg, config('paths.temporary'));
     }
 }

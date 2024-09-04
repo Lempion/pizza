@@ -6,16 +6,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-        src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/public_function_and_action.js'])
+    @csrf
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/public_function_and_action.js', 'resources/js/toast-functions.js'])
 </head>
 
-<body>
+<body class="custom-scroll">
     <div class="flex bg-white dark:bg-gray-900">
-        <x-sidebar class="min-w-fit flex-grow-0 flex-shrink-0 hidden md:block"/>
+        <x-sidebar class="fixed w-[250px] flex-grow-0 flex-shrink-0"/>
+        <div class="w-[250px]"></div>
         <main class="mt-4 px-4 w-9/12 mx-auto">
             {{ $slot }}
         </main>

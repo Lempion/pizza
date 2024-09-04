@@ -12,8 +12,14 @@ export default defineConfig({
                 'resources/js/product-create.js',
                 'resources/js/public_function_and_action.js',
                 'resources/js/product-create-combo.js',
+                'resources/js/toast-functions.js',
             ],
             refresh: false,
         }),
     ],
+    resolve: {
+        alias: {
+            '$': 'jQuery'
+        },
+    },
 });

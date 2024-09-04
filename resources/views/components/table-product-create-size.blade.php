@@ -25,7 +25,7 @@
             <tr class="tr-active" data-current-tr="1">
                 <td class="py-2 px-2">
                     <div>
-                        <x-forms.select name="size" label="" class="selector-size text-center">
+                        <x-forms.select name="size" label="" class="tr-input selector-size text-center">
                             <option selected disabled hidden value="not-choose">Sizes</option>
                             @foreach($sizeProducts as $size)
                                 <option value="{{ $size->id }}">{{ $size->name }}</option>
@@ -34,13 +34,13 @@
                     </div>
                 </td>
                 <td class="py-2 px-2">
-                    <x-forms.input name="price" label="" class="input-price only-nums text-center"></x-forms.input>
+                    <x-forms.input name="price" label="" class="tr-input input-price only-nums text-center"></x-forms.input>
                 </td>
                 <td class="py-2 px-2">
-                    <x-forms.input name="gram" label="" class="input-gram only-nums text-center"></x-forms.input>
+                    <x-forms.input name="gram" label="" class="tr-input input-gram only-nums text-center"></x-forms.input>
                 </td>
                 <td class="py-2 px-2">
-                    <x-forms.checkbox class="default-product hidden" name="default-product" label=""/>
+                    <x-forms.checkbox class="tr-input default_product hidden" name="default_product" label=""/>
                 </td>
                 <td class="py-2 px-2">
                     <div class="flex w-full justify-center space-x-5 active-create">

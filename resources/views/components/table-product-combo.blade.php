@@ -42,7 +42,7 @@
             {{--                    <x-forms.input name="gram" label="" class="input-gram only-nums text-center"></x-forms.input>--}}
             {{--                </td>--}}
             {{--                <td class="py-2 px-2">--}}
-            {{--                    <x-forms.checkbox class="default-product hidden" name="default-product" label=""/>--}}
+            {{--                    <x-forms.checkbox class="default_product hidden" name="default_product" label=""/>--}}
             {{--                </td>--}}
             {{--                <td class="py-2 px-2">--}}
             {{--                    <div class="flex w-full justify-center space-x-5 active-create">--}}
