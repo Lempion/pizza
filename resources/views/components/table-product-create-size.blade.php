@@ -34,10 +34,10 @@
                     </div>
                 </td>
                 <td class="py-2 px-2">
-                    <x-forms.input name="price" label="" class="tr-input input-price only-nums text-center"></x-forms.input>
+                    <x-forms.input name="price" label="" class="tr-input input-price only-nums text-center"/>
                 </td>
                 <td class="py-2 px-2">
-                    <x-forms.input name="gram" label="" class="tr-input input-gram only-nums text-center"></x-forms.input>
+                    <x-forms.input name="gram" label="" class="tr-input input-gram only-nums text-center"/>
                 </td>
                 <td class="py-2 px-2">
                     <x-forms.checkbox class="tr-input default_product hidden" name="default_product" label=""/>

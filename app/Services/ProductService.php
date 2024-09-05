@@ -12,20 +12,20 @@ class ProductService
 
     public static function createProduct($data): bool
     {
-        $pictureName = basename($data->picture);
+        $pictureName = basename($data['picture']);
 
         $product = Product::create([
-            'name' => $data->name,
-            'description' => $data->description,
-            'in_stock' => $data->inStock,
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'in_stock' => $data['inStock'],
             'img' => $pictureName,
-            'category_id' => Category::where('slug', $data->category)->first()->id,
+            'category_id' => Category::where('slug', $data['category'])->first()->id,
             'active' => true,
         ]);
 
         $preparedProductSizesArr = [];
 
-        foreach ($data->productSizes as $productSize) {
+        foreach ($data['productSizes'] as $productSize) {
             $preparedProductSizesArr[$productSize['size']] = [
                 'price' => $productSize['price'],
                 'discount_price' => null,

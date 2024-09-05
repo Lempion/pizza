@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,5 +38,12 @@ class Product extends Model
     public function nutritionalValue(): HasOne
     {
         return $this->hasOne(NutritionalValue::class);
+    }
+
+    protected function img(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => asset('storage') . '/' . config('paths.products_img') . '/' . $value,
+        );
     }
 }

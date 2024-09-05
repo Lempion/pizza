@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\CategoryEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductStoreRequest;
 use App\Http\Requests\Admin\UploadProductImgRequest;
@@ -25,7 +26,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::with('category')->whereHas('category', function ($query){
+            return $query->where('slug', '!=', CategoryEnum::Combo->value);
+        })->get();
 
         return view('admin.products.create', compact('categories', 'products'));
     }
