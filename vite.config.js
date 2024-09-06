@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/js/product-create-combo.js',
                 'resources/js/toast-functions.js',
                 'resources/js/product-table-modal.js',
+                'resources/js/product-store.js',
             ],
             refresh: false,
         }),

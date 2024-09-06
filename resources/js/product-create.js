@@ -1,6 +1,5 @@
 $(document).ready(function () {
     let routeGetTable = $('.routeGetTable').val();
-    let routeProductStore = $('.routeProductStore').val();
     let srcImage = $('.srcImage').val();
 
     //START Создание размеров продукта если выбрана любая категория, кроме Комбо
@@ -221,13 +220,6 @@ $(document).ready(function () {
     });
 
     $('.store-product').on('click', function () {
-        let name = $('#name').val();
-        if (name.length === 0) {
-            $('#name').addClass('input-invalid');
-            toastError('Field name invalid');
-            return;
-        }
-
         let category = $('#category').val();
         if (category === null) {
             $('#category').addClass('input-invalid');
@@ -235,78 +227,13 @@ $(document).ready(function () {
             return;
         }
 
-        let description = $('#description').val();
-        if (description.length === 0) {
-            $('#description').addClass('input-invalid');
-            toastError('Field description invalid');
-            return;
+        switch (category) {
+            case 'combo':
+                storeProductCombo();
+                break;
+            default:
+                storeProduct();
         }
-
-        let inStock = $('#in_stock').val();
-        if (inStock.length === 0) {
-            $('#in_stock').addClass('input-invalid');
-            toastError('Field inStock invalid');
-            return;
-        }
-
-        let picture = $('#current_img_path').val();
-        if (picture.length === 0) {
-            $('#current_img_path').addClass('input-invalid');
-            toastError('Field picture invalid');
-            return;
-        }
-
-        let productSizesCreated = $('.size-product-tbody').find('tr.tr-created');
-
-        if (productSizesCreated.length === 0) {
-            toastError('Add at least 1 size');
-            return;
-        }
-
-        let productSizesInputs = [];
-
-        productSizesCreated.filter(function () {
-            if ($(this).attr('class').split(' ').length === 1) {
-                let arraySizes = {};
-
-                $(this).find('.tr-input').map(function (key, value) {
-                    let val = $(value).val();
-
-                    if ($(value).attr('type') === 'checkbox') {
-                        val = ($(value).is(':checked') ? 1 : 0);
-                    }
-
-                    arraySizes[$(value).attr('name')] = val
-                })
-                productSizesInputs.push(arraySizes);
-            }
-        });
-
-        let token = $('[name="_token"]').val();
-
-        $.ajax({
-            url: routeProductStore,
-            method: 'POST',
-            data: {
-                'name': name,
-                'category': category,
-                'description': description,
-                'inStock': inStock,
-                'picture': picture,
-                'productSizes': productSizesInputs,
-                '_token': token
-            },
-            success(answer) {
-                toastSuccess(answer);
-                $('.product-input').val('');
-                $('.product-img').attr('src', '');
-                $('.selector-category').val(0);
-                $('.table-wrapper').empty();
-            },
-            error(errors) {
-                console.log(errors)
-            }
-        })
     })
 
     function removeAllInputInvalid() {

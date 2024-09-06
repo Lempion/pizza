@@ -1,5 +1,5 @@
 <x-admin-layout>
-    @vite(['resources/js/product-create.js', 'resources/js/product-create-combo.js', 'resources/js/product-table-modal.js'])
+    @vite(['resources/js/product-create.js', 'resources/js/product-create-combo.js', 'resources/js/product-table-modal.js', 'resources/js/product-store.js'])
     <x-header title="Product create"/>
 
     <section class="mt-12 flex space-x-3">
@@ -41,11 +41,9 @@
         <input type="hidden" class="routeUploadProductImg" value="{{ route('upload-product-img') }}">
         <input type="hidden" class="srcImage" value="{{ asset('') }}">
         <input type="hidden" class="routeProductStore" value="{{ route('products.store') }}">
+        <input type="hidden" class="routeComboStore" value="{{ route('products.store-combo') }}">
 
-        <div class="table-wrapper w-full h-full relative">
-            {{--                        <x-product-create-size :size-products="$sizeProducts"/>--}}
-                        <x-product-combo :products="$products"/>
-        </div>
+        <div class="table-wrapper w-full h-full relative"></div>
 
         <div class="store-product fixed bottom-16 right-16 w-20 h-20 bg-orange-500/90 rounded-full shadow-md hover:cursor-pointer hover:bg-orange-500 flex justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-16 h-16 text-white">

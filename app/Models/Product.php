@@ -17,7 +17,7 @@ class Product extends Model
 
     public function relatedProducts(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_combo', 'product_id', 'related_product_id');
+        return $this->belongsToMany(Product::class, 'product_combo', 'product_id', 'related_product_id')->withPivot(['size_product_id']);
     }
 
     public function additionalProducts(): BelongsToMany

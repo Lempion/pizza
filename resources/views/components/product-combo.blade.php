@@ -8,7 +8,7 @@
 <div class="space-y-3">
     <div class="flex space-x-3">
         <div class="w-1/4">
-            <x-forms.input label="Price" name="combo-product-price"/>
+            <x-forms.input class="only-nums" label="Price" name="combo-product-price"/>
         </div>
 
         <div>

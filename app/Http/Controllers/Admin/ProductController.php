@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\CategoryEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductStoreComboRequest;
 use App\Http\Requests\Admin\ProductStoreRequest;
 use App\Http\Requests\Admin\UploadProductImgRequest;
 use App\Models\Category;
-use App\Models\Product;
 use App\Services\ImageService;
 use App\Services\Models\ModelProduct;
 use App\Services\ProductService;
@@ -26,17 +25,21 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $products = Product::with('category')->whereHas('category', function ($query){
-            return $query->where('slug', '!=', CategoryEnum::Combo->value);
-        })->get();
-
-        return view('admin.products.create', compact('categories', 'products'));
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(ProductStoreRequest $request)
     {
         if (ProductService::createProduct($request->validated())) {
             return response()->json('Product created!');
+        }
+        return response()->json('Server error', 500);
+    }
+
+    public function storeCombo(ProductStoreComboRequest $request)
+    {
+        if (ProductService::createCombo($request->validated())) {
+            return response()->json('Combo created!');
         }
         return response()->json('Server error', 500);
     }

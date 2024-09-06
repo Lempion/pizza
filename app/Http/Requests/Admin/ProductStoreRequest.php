@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\CategoryEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +24,7 @@ class ProductStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category' => 'required|string|exists:categories,slug',
+            'category' => 'required|string|not_in:' . CategoryEnum::Combo->value . '|exists:categories,slug',
             'description' => 'required|string|min:50|max:250',
             'inStock' => 'required|integer|gt:0',
             'name' => 'required|string|min:5',
@@ -34,7 +35,7 @@ class ProductStoreRequest extends FormRequest
                 }
             },],
             'productSizes' => 'required|array',
-            'productSizes.*.size' => 'required|exists:size_products,id',
+            'productSizes.*.size' => 'required|exists:size_products,id|distinct',
             'productSizes.*.price' => 'required|integer|gt:0',
             'productSizes.*.gram' => 'required|integer|gt:0',
             'productSizes.*.default_product' => 'required|boolean'
