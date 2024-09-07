@@ -6,10 +6,10 @@ use App\Models\Product;
 
 class ModelProduct
 {
-    private const PAGINATE_PAGES = 5;
+    private const PAGINATE_PAGES = 10;
 
     public static function getProducts()
     {
-        return Product::paginate(self::PAGINATE_PAGES)->all();
+        return Product::with(['sizeProducts', 'category'])->paginate(self::PAGINATE_PAGES);
     }
 }

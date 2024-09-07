@@ -7,9 +7,10 @@ use App\Http\Requests\Admin\ProductStoreComboRequest;
 use App\Http\Requests\Admin\ProductStoreRequest;
 use App\Http\Requests\Admin\UploadProductImgRequest;
 use App\Models\Category;
+use App\Models\Product;
 use App\Services\ImageService;
 use App\Services\Models\ModelProduct;
-use App\Services\ProductService;
+use App\Services\Product\CreateProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -30,7 +31,7 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
-        if (ProductService::createProduct($request->validated())) {
+        if (CreateProductService::createProduct($request->validated())) {
             return response()->json('Product created!');
         }
         return response()->json('Server error', 500);
@@ -38,15 +39,15 @@ class ProductController extends Controller
 
     public function storeCombo(ProductStoreComboRequest $request)
     {
-        if (ProductService::createCombo($request->validated())) {
+        if (CreateProductService::createCombo($request->validated())) {
             return response()->json('Combo created!');
         }
         return response()->json('Server error', 500);
     }
 
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        return view('admin.products.show', compact('product'));
     }
 
     public function edit(string $id)
@@ -66,7 +67,7 @@ class ProductController extends Controller
 
     public function getCurrentTale(Category $category): string
     {
-        return ProductService::renderCurrentTable($category->slug);
+        return CreateProductService::renderCurrentTable($category->slug);
     }
 
     public function uploadProductImg(UploadProductImgRequest $request): string

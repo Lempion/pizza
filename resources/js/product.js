@@ -1,3 +1,9 @@
+$(document).ready(function () {
+    if ($('.product-modal').find('.combo-products-wrapper')){
+        recalculateComboPrice();
+    }
+})
+
 $('.product-card-wrapper').on('click', function (event) {
 
     if ($(event.target).hasClass('in-card-btn')) {
@@ -52,7 +58,6 @@ $('.additional-product').on('click', function () {
     }
 })
 
-
 function disableScroll() {
     $('body').addClass('overflow-hidden pr-scroll');
     $('#main-nav').addClass('pr-scroll');
@@ -61,4 +66,15 @@ function disableScroll() {
 function enableScroll() {
     $('body').removeClass('overflow-hidden pr-scroll');
     $('#main-nav').removeClass('pr-scroll');
+}
+
+function recalculateComboPrice(){
+    let oldPrice = 0;
+    $('.related-product-card input.price').each(function (){
+        console.log(parseInt($(this).val()))
+        oldPrice += parseInt($(this).val());
+    })
+
+    $('.old-price').text(oldPrice + '$')
+    console.log(12)
 }

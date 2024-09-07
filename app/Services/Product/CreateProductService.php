@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Product;
 
 use App\Enums\CategoryEnum;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SizeProduct;
+use App\Services\ImageService;
+use function config;
+use function view;
 
-class ProductService
+class CreateProductService
 {
 
     public static function createProduct(array $data): bool

@@ -29,15 +29,6 @@
                     <tr data-product-id-modal-tr="{{ $product->id }}">
                         <td class="py-2 px-2">
                             <div class="">{{ $product->name }}</div>
-
-                            {{--                        <div>--}}
-                            {{--                            <x-forms.select name="size" label="" class="selector-size text-center">--}}
-                            {{--                                <option selected disabled hidden value="not-choose">Sizes</option>--}}
-                            {{--                                @foreach($sizeProducts as $size)--}}
-                            {{--                                    <option value="{{ $size->id }}">{{ $size->name }}</option>--}}
-                            {{--                                @endforeach--}}
-                            {{--                            </x-forms.select>--}}
-                            {{--                        </div>--}}
                         </td>
                         <td class="py-2 px-2">
                             <div>{{ $product->category->name }}</div>

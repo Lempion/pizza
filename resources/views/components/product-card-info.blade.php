@@ -1,12 +1,19 @@
 @props(['product'])
 
 <div class="space-y-1">
-    <div class="text-3xl font-medium">Name</div>
+    <div class="text-3xl font-medium">{{ $product->name }}</div>
 
-    <div class="text-sm font-medium">1 шт, 200г</div>
-    <div class="text-lg font-medium">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut
-        culpa
-        debitis deleniti explicabo incidunt, iste magni modi necessitatibus, neque, nulla odit pariatur
-        quibusdam quisquam rem sapiente similique soluta vitae?
-    </div>
+    @if($product->category->slug !== \App\Enums\CategoryEnum::Combo->value)
+        <div class="text-sm font-medium flex space-x-2">
+            @php
+                $defaultSizeProduct = $product->sizeProducts->collect()->firstWhere(function ($elem){
+                    return $elem->pivot->default == true;
+            });
+            @endphp
+            <p class="quantity">{{ $defaultSizeProduct->name }}</p>
+            ,
+            <p class="gram">{{ $defaultSizeProduct->pivot->gram . 'g' }}</p>
+        </div>
+    @endif
+    <div class="text-lg font-medium">{{ $product->description }}</div>
 </div>
