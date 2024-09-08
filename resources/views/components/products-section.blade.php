@@ -3,16 +3,9 @@
 <div class="products-section" id="{{ $anchor }}">
     <div class="text-left text-4xl font-semibold mb-5">{{ $name }}</div>
     <div class="w-full flex flex-wrap">
-        {{--    @foreach($products as $product)--}}
-        {{--        <x-product-card slug="{{ $product-> }}" price="{{ $product-> }}" name="{{ $product-> }}" description="{{ $product-> }}" src="{{ $product-> }}"/>--}}
-        {{--    @endforeach--}}
-
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
-        <x-product-card slug="{{ fake()->unique()->word() }}" price="{{ fake()->numberBetween(5,60) }}" name="{{ ucfirst(fake()->word()) }}" description="{{ fake()->text() }}" src="{{ asset('storage/images/products/coffe.avif') }}"/>
+        @foreach($products as $product)
+            <x-product-card product-id="{{ $product->id }}" price="{{ $product->sizeProducts->firstWhere('pivot.default', 1)->pivot->price }}" name="{{ $product->name }}" description="{{ $product->description }}" src="{{ $product->img }}"/>
+        @endforeach
     </div>
 </div>
 

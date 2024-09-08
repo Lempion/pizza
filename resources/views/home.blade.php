@@ -1,18 +1,14 @@
 <x-app-layout>
     <div>
-        <x-products-section anchor="breakfast" name="Breakfast" products="[]"/>
-        <x-products-section anchor="pizza" name="Pizza" products="[]"/>
-        <x-products-section anchor="combo" name="Combo" products="[]"/>
-        <x-products-section anchor="snacks" name="Snacks" products="[]"/>
-        <x-products-section anchor="cocktails" name="Cocktails" products="[]"/>
-        <x-products-section anchor="coffee" name="Coffee" products="[]"/>
-        <x-products-section anchor="drinks" name="Drinks" products="[]"/>
-        <x-products-section anchor="desserts" name="Desserts" products="[]"/>
+        @foreach($productsSections as $productsSection)
+            {!! $productsSection !!}
+        @endforeach
     </div>
 
-    <input type="hidden" id="old-slug" value="">
+    <input type="hidden" id="old-product-id" value="">
+    <input type="hidden" id="route-get-modal-product" value="{{ route('get-modal-product', '') . '/' }}">
 
-    <x-product-modal product="-"/>
+    <div class="modal-block"></div>
 
     @vite('resources/js/product.js')
 </x-app-layout>

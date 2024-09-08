@@ -1,6 +1,6 @@
-@props(['product', 'show' => false])
+@props(['product', 'relatedProducts' => null])
 
-<div class="product-modal opacity-100 @if(!$show) hidde-block @endif fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-[31] transition duration-200 ease-in-out">
+<div class="product-modal opacity-100 fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-[31] transition duration-200 ease-in-out">
     <div class="bg-white rounded-xl overflow-hidden shadow-xl w-6/12 max-h-[700px] h-full flex">
         <div class="h-full w-1/2 border border-r flex justify-center items-center">
             <img class="w-auto max-h-[350px] h-auto" src="{{ $product->img }}" alt="">
@@ -12,7 +12,7 @@
                 <x-product-card-setting :product="$product"/>
 
                 @if($product->category->slug === \App\Enums\CategoryEnum::Combo->value)
-                    <x-product-card-combo-products :related_products="$product->relatedProducts"/>
+                    <x-product-card-combo-products :related_products="$relatedProducts"/>
                 @else
                     <x-product-card-addition addition_products="-"/>
                 @endif

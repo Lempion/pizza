@@ -1,6 +1,6 @@
-@props(['name', 'description', 'src', 'price', 'slug'])
+@props(['name', 'description', 'src', 'price', 'productId'])
 
-<div data-slug="{{$slug}}" class="product-card-wrapper w-3/12 max-h-[460px] h-[460px] px-10 py-5 mb-10 cursor-pointer hover:bg-gray-100 rounded-xl transition duration-300 ease-in-out">
+<div data-product-id="{{$productId}}" class="product-card-wrapper w-3/12 max-h-[460px] h-[460px] px-10 py-5 mb-10 cursor-pointer hover:bg-gray-100 rounded-xl transition duration-300 ease-in-out">
     <div class="w-full h-full rounded-md flex flex-col justify-between items-center">
         <div class="w-full max-h-64 h-auto flex justify-center items-center">
             <img src="{{ $src }}" class="w-auto h-full" alt="">

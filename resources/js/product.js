@@ -1,54 +1,46 @@
-$(document).ready(function () {
-    if ($('.product-modal').find('.combo-products-wrapper')){
-        recalculateComboPrice();
-    }
-})
+let routeGetModalProduct = $('#route-get-modal-product').val();
 
-$('.product-card-wrapper').on('click', function (event) {
+$(document).on('click', '.product-card-wrapper', function (event) {
 
     if ($(event.target).hasClass('in-card-btn')) {
         return;
     }
 
-    let productModal = $('.product-modal');
+    let modalBlock = $('.modal-block');
 
-    let slug = $(this).data('slug');
-    let oldSlug = $('#old-slug').val();
+    let productId = $(this).attr('data-product-id');
+    let oldProductId = $('#old-product-id').val();
 
     disableScroll();
 
-    if (slug === oldSlug) {
-        $(productModal).removeClass('hidde-block');
+    if (productId === oldProductId) {
+        $(modalBlock).removeClass('hidde-block');
         return;
     }
 
-    $(oldSlug).val(slug);
-    // $(productModal).empty();
+    $(oldProductId).val(productId);
+    $(modalBlock).empty();
 
-    // $.ajax({
-    //     url : '',
-    //     method : '',
-    //     data : {},
-    //     success(answer){
-    //         console.log(answer)
-    //     },
-    //     error(errors){
-    //         console.log(errors)
-    //     }
-    // })
-
-    // $(productModal).append();
-    $(productModal).removeClass('hidde-block');
-})
-
-$('.product-modal').on('click', function (event) {
+    $.ajax({
+        url: routeGetModalProduct + productId,
+        method: 'GET',
+        success(answer) {
+            $(modalBlock).append(answer);
+            if ($('.product-modal').find('.combo-products-wrapper')) {
+                recalculateComboPrice();
+            }
+        },
+        error(errors) {
+            console.log(errors)
+        }
+    })
+    $(modalBlock).removeClass('hidde-block');
+}).on('click', '.product-modal', function (event) {
     if ($(event.target).hasClass('product-modal')) {
         enableScroll()
         $(this).addClass('hidde-block');
     }
-})
-
-$('.additional-product').on('click', function () {
+}).on('click', '.additional-product', function () {
     if ($(this).hasClass('active-additional-product')) {
         $(this).removeClass('active-additional-product');
         $(this).find('.circle').removeClass('opacity-100')
@@ -68,13 +60,11 @@ function enableScroll() {
     $('#main-nav').removeClass('pr-scroll');
 }
 
-function recalculateComboPrice(){
+function recalculateComboPrice() {
     let oldPrice = 0;
-    $('.related-product-card input.price').each(function (){
-        console.log(parseInt($(this).val()))
+    $('.related-product-card input.price').each(function () {
         oldPrice += parseInt($(this).val());
     })
 
     $('.old-price').text(oldPrice + '$')
-    console.log(12)
 }

@@ -3,11 +3,11 @@
 use App\Enums\PermissionEnum;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('product_modal/{id}', [MainController::class, 'getModalProduct'])->name('get-modal-product');
 
 Route::prefix('admin')->middleware('role:Admin')->group(function () {
 
@@ -19,7 +19,6 @@ Route::prefix('admin')->middleware('role:Admin')->group(function () {
         Route::post('upload_product_img', [ProductController::class, 'uploadProductImg'])->name('upload-product-img');
         Route::post('store_combo', [ProductController::class, 'storeCombo'])->name('products.store-combo');
         Route::resource('products', ProductController::class);
-//        Route::get('create', [ProductController::class, 'index'])->name('admin.products.index');
     });
 });
 

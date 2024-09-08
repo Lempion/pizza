@@ -6,7 +6,7 @@
 </head>
 <body class="font-sans w-11/12 mx-auto custom-scroll">
 
-    <x-product-modal :product="$product" :show="true"/>
+    <x-product-modal :product="$product"/>
     @vite('resources/js/product.js')
 </body>
 </html>
