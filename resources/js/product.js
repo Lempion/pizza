@@ -9,23 +9,23 @@ $(document).on('click', '.product-card-wrapper', function (event) {
     let modalBlock = $('.modal-block');
 
     let productId = $(this).attr('data-product-id');
-    let oldProductId = $('#old-product-id').val();
+    let oldProductId = $('#old-product-id');
 
     disableScroll();
 
-    if (productId === oldProductId) {
+    if (productId === oldProductId.val()) {
         $(modalBlock).removeClass('hidde-block');
         return;
     }
 
-    $(oldProductId).val(productId);
+    oldProductId.val(productId);
     $(modalBlock).empty();
 
     $.ajax({
         url: routeGetModalProduct + productId,
         method: 'GET',
         success(answer) {
-            $(modalBlock).append(answer);
+            $(modalBlock).append(answer).removeClass('hidde-block');
             if ($('.product-modal').find('.combo-products-wrapper')) {
                 recalculateComboPrice();
             }
@@ -34,11 +34,10 @@ $(document).on('click', '.product-card-wrapper', function (event) {
             console.log(errors)
         }
     })
-    $(modalBlock).removeClass('hidde-block');
 }).on('click', '.product-modal', function (event) {
     if ($(event.target).hasClass('product-modal')) {
         enableScroll()
-        $(this).addClass('hidde-block');
+        $('.modal-block').addClass('hidde-block');
     }
 }).on('click', '.additional-product', function () {
     if ($(this).hasClass('active-additional-product')) {
