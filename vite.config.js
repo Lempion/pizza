@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/product-table-modal.js',
                 'resources/js/product-store.js',
                 'resources/js/product-index.js',
+                'resources/js/product-create-additional-product.js',
             ],
             refresh: false,
         }),

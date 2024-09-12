@@ -38,7 +38,10 @@ class ProductStoreRequest extends FormRequest
             'productSizes.*.size' => 'required|exists:size_products,id|distinct',
             'productSizes.*.price' => 'required|integer|gt:0',
             'productSizes.*.gram' => 'required|integer|gt:0',
-            'productSizes.*.default_product' => 'required|boolean'
+            'productSizes.*.default_product' => 'required|boolean',
+            'additionalProductActive' => 'required|boolean',
+            'additionalProductsIds' => 'required_if:additionalProductActive,true|array',
+            'additionalProductsIds*' => 'distinct|exists:additional_products,id',
         ];
     }
 

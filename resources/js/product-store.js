@@ -18,6 +18,20 @@ window.storeProduct = function () {
         return;
     }
 
+    let additionalProductActive = Number($('#additional-product-toggle').is(':checked'));
+    let additionalProductsIds = [];
+
+    if (additionalProductActive){
+        $('.added-additional-product tr').map(function (key, value) {
+            additionalProductsIds.push($(value).attr('data-additional-product-id-modal-tr'));
+        })
+
+        if (additionalProductsIds.length === 0){
+            toastError('No additional products added');
+            return;
+        }
+    }
+
     let productSizesInputs = [];
 
     productSizesCreated.filter(function () {
@@ -47,6 +61,8 @@ window.storeProduct = function () {
             'inStock': defaultFields.inStock,
             'picture': defaultFields.picture,
             'productSizes': productSizesInputs,
+            'additionalProductActive': additionalProductActive,
+            'additionalProductsIds': additionalProductsIds,
             '_token': token
         },
         success(answer) {

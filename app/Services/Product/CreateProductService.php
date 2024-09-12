@@ -3,6 +3,7 @@
 namespace App\Services\Product;
 
 use App\Enums\CategoryEnum;
+use App\Models\AdditionalProduct;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SizeProduct;
@@ -20,6 +21,8 @@ class CreateProductService
         $productSizesArr = self::prepareProductSizeArr($data['productSizes']);
 
         $product->sizeProducts()->sync($productSizesArr);
+
+        if ($data['additionalProductActive']) $product->additionalProducts()->sync($data['additionalProductsIds']);
 
         return true;
     }
@@ -66,7 +69,8 @@ class CreateProductService
     private static function renderDefaultTable(): string
     {
         $sizeProducts = SizeProduct::where('visible', true)->get();
-        return view('components.product-create-size', compact('sizeProducts'))->render();
+        $additionalProducts = AdditionalProduct::all();
+        return view('components.product-create-size', compact('sizeProducts', 'additionalProducts'))->render();
     }
 
     private static function createDefaultProduct(array $data): mixed

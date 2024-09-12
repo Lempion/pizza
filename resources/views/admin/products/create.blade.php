@@ -1,5 +1,6 @@
 <x-admin-layout>
-    @vite(['resources/js/product-create.js', 'resources/js/product-create-combo.js', 'resources/js/product-table-modal.js', 'resources/js/product-store.js'])
+    @vite(['resources/js/product-create.js', 'resources/js/product-create-combo.js',
+'resources/js/product-table-modal.js', 'resources/js/product-store.js', 'resources/js/product-create-additional-product.js'])
     <x-header title="Product create"/>
 
     <section class="mt-12 flex space-x-3">
@@ -51,5 +52,4 @@
             </svg>
         </div>
     </section>
-
 </x-admin-layout>
