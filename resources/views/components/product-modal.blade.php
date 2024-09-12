@@ -13,10 +13,9 @@
 
                 @if($product->category->slug === \App\Enums\CategoryEnum::Combo->value)
                     <x-product-card-combo-products :related_products="$relatedProducts"/>
-                @else
-                    <x-product-card-addition addition_products="-"/>
+                @elseif(!$product->additionalProducts->isEmpty())
+                    <x-product-card-addition :addition_products="$product->additionalProducts"/>
                 @endif
-
             </div>
             <div class="h-[10%] w-full flex justify-center items-center shadow-inner">
                 <div class="w-4/12 flex space-x-1">

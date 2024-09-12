@@ -32,7 +32,7 @@ class MainService
     public static function getModalProductFromCache($productId): string
     {
         return Cache::remember('products:id_' . $productId, 24 * 60 * 60, function () use ($productId) {
-            $product = Product::with('category', 'sizeProducts')->where('active', 1)->where('id', $productId)->first();
+            $product = Product::with('category', 'sizeProducts', 'additionalProducts')->where('active', 1)->where('id', $productId)->first();
 
             $relatedProducts = null;
             if ($product->category->slug === CategoryEnum::Combo->value) {
