@@ -29,6 +29,7 @@ class ProductSeeder extends Seeder
                     'inStock' => rand(8, 40),
                     'name' => fake()->name,
                     'picture' => $category->slug . '.png',
+                    'additionalProductActive' => false,
                 ];
 
                 if ($category->slug === CategoryEnum::Combo->value) {

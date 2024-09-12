@@ -24,6 +24,8 @@ class CreateProductService
 
         if ($data['additionalProductActive']) $product->additionalProducts()->sync($data['additionalProductsIds']);
 
+        self::cacheProduct($product);
+
         return true;
     }
 
@@ -46,6 +48,8 @@ class CreateProductService
         $relatedProductsArr = self::prepareRelatedProductsForComboArr($data['productForCombo']);
 
         $product->relatedProducts()->sync($relatedProductsArr);
+
+        self::cacheProduct($product);
 
         return true;
     }
@@ -114,5 +118,11 @@ class CreateProductService
             ];
         }
         return $resultArr;
+    }
+
+    private static function cacheProduct($product): void
+    {
+        ProductRedisService::rewriteCategory($product->category);
+        ProductRedisService::rememberProduct($product->id);
     }
 }
